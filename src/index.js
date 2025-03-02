@@ -21,15 +21,15 @@ routes(app);
 
 mongoose.connect('mongodb+srv://Thong:M1nhth0ng@cluster0.7ooweir.mongodb.net/?retryWrites=true&w=majority')
     .then(() => {
-        console.log('Connect Database success!')
+        //console.log('Connect Database success!')
     })
     .catch((err) => {
-        console.log(err)
+        //console.log(err)
     })
 //console.log('a', process.env.CLIENT_ID)
 
 
 app.listen(port, () => {
-    console.log('Server is running in port:', +port)
+    //console.log('Server is running in port:', +port)
 })
 
