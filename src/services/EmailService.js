@@ -26,12 +26,13 @@ const sendEmailCreateOrder = async (email, orderItems) => {
 
         attachImage.push({ path: order.image })
     })
+    // console.log('totalprice', order)
 
     // send mail with defined transport object
     let info = await transporter.sendMail({
         from: process.env.MAIL_ACCOUNT, // sender address
         to: email, // list of receivers
-        subject: "Bạn đã đặt hàng tại shop Hoàng Minh mobile", // Subject line
+        subject: "Hóa đơn từ shop Hoàng Minh mobile", // Subject line
         text: "Hello world?", // plain text body
         html: `
         <div><b>Bạn đã đặt hàng thành công tại shop Hoàng minh mobile</b></div> 

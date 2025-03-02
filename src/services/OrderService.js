@@ -234,11 +234,41 @@ const updateOrder = (id, data) => {
     })
 }
 
+const getMonthlyRevenue = () => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const monthlyRevenue = await Order.aggregate([
+                {
+                    $group: {
+                        _id: { $month: "$createdAt" }, // Group by month
+                        totalRevenue: { $sum: "$totalPrice" } // Sum up totalPrice for each month
+                    }
+                },
+                {
+                    $sort: { _id: 1 } // Sort by month
+                }
+            ]);
+
+            resolve({
+                status: 'OK',
+                message: 'Success',
+                data: monthlyRevenue.map(item => ({
+                    month: item._id,
+                    revenue: item.totalRevenue
+                }))
+            });
+        } catch (e) {
+            reject(e);
+        }
+    });
+};
+
 module.exports = {
     createOrder,
     getAllOrderDetails,
     getOrderDetails,
     cancelOrderDetails,
     getAllOrder,
-    updateOrder
+    updateOrder,
+    getMonthlyRevenue
 }
